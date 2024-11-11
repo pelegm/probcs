@@ -1,0 +1,506 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% filename: probcs.tex                 %
+% version: 1.01                        %
+% date: 6th November 2010              %
+% author: Peleg Michaeli               %
+% copyright: no copyright at all       %
+% email: peleg.michaeli@math.tau.ac.il %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% NO COPYRIGHT AT ALL. This work is released to the public domain. (a notice)
+% ---------------------------------------------------------------------------
+% We, the persons who have associated work with this specific document/file 
+%("We") hereby dedicates whatever copyright We hold in the work of authorship
+% identified below (the "Work") to the PUBLIC DOMAIN; Moreover, We dedicate
+% any copyright interest We may have in the associated work.
+% 
+% We make this dedication for the benefit of the public at large and to the
+% detriment of our heirs and successors. We intend this dedication to be an
+% overt act of relinquishment in perpetuity of all % present and future
+% rights under copyright law whether vested or contingent, in the Work. We
+% understand that such relinquishment of all rights includes the
+% relinquishment of all rights to enforce (by lawsuit or otherwise) those
+% copyrights in the Work.
+% 
+% We recognize that, once placed in the public domain, the Work may be freely
+% reproduced, distributed, transmitted, used, copied, modified, merged,
+% published, built upon, or otherwise exploited by anyone for any purpose,
+% commercial or non-commercial, and in any way, including by methods that
+% have not yet been invented or conceived.
+% 
+% This notice applies to the associated document/file and to it alone.
+% 
+% This notice applies worldwide; in cases this is not legally possible, We
+% grant anyone the right to use this work in any way and for any purpose,
+% including without limitation the rights to reproduce, distribute, transmit,
+% use, copy, modify, merge, publish, build upon, and/or sell copies of this
+% document/file, under no terms or conditions.
+% 
+% You (the reader of this notice) are NOT obliged to include this notice in
+% copies or portions of this document/file; You are highly encouraged to do 
+% so, though.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{amsfonts,amsmath}
+\usepackage[landscape]{geometry}
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+	{ \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+
+\pagestyle{empty}
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{0}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex} % somehow "0pt plus" really changes!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\renewcommand\arraystretch{2}
+\raggedright
+\footnotesize
+\begin{multicols}{4}
+\setlength{\columnseprule}{0.2pt}
+
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\newcommand{\p}[1]{\mathbb{P}\left({#1}\right)}
+\newcommand{\var}[1]{\text{Var}\left({#1}\right)}
+\newcommand{\e}[1]{\mathbb{E}\left({#1}\right)}
+\newcommand{\cov}[1]{\text{Cov}\left({#1}\right)}
+
+\begin{center}
+     \Large{\textbf{Probability Cheat Sheet}} \\
+\end{center}
+
+\section{Distributions}
+\subsection{Unifrom Distribution}
+\begin{tabular}{@{}ll@{}}
+\verb!notation!     & $\displaystyle{U\left[a,b\right]}$ \\
+\verb!cdf!          & $\displaystyle{\frac{x-a}{b-a}}$ for $\displaystyle{x\in\left[a,b\right]}$ \\
+\verb!pdf!          & $\displaystyle{\frac{1}{b-a}}$ for $\displaystyle{x\in\left[a,b\right]}$ \\
+\verb!expectation!  & $\displaystyle{\frac{1}{2}\left(a+b\right)}$ \\
+\verb!variance!     & $\displaystyle{\frac{1}{12}\left(b-a\right)^2}$ \\
+\verb!mgf!          & $\displaystyle{\frac{e^{tb}-e^{ta}}{t\left(b-a\right)}}$
+\end{tabular}
+
+\verb!story:! all intervals of the same length on the distribution's
+support are equally probable.
+
+
+\subsection{Gamma Distribution}
+\begin{tabular}{@{}ll@{}}
+\verb!notation!     & $\displaystyle{Gamma\left(k,\theta\right)}$ \\
+\verb!pdf!          & $\displaystyle{\frac{\theta^k x^{k-1}e^{-\theta
+                       x}}{\Gamma\left(k\right)}\mathbb{I}_{x>0}}$ \\
+                    & $\displaystyle{\Gamma\left(k\right)=\int_0^\infty
+                       x^{k-1}e^{-x}dx}$ \\
+\verb!expectation!  & $\displaystyle{k\theta}$ \\
+\verb!variance!     & $\displaystyle{k\theta^2}$ \\
+\verb!mgf!          & $\displaystyle{\left(1-\theta t\right)^{-k}}$ for
+                      $\displaystyle{t<\frac{1}{\theta}}$ \\
+\verb!ind. sum!     & $\displaystyle{\sum_{i=1}^nX_i\sim Gamma\left(\sum_{i=1}^nk_i,\theta\right)}$
+\end{tabular}
+
+\verb!story:! the sum of k independent exponentially distributed random variables, each of which has
+a mean of $\theta$ (which is equivalent to a rate parameter of $\theta^{-1}$).
+
+
+\subsection{Geometric Distribution}
+\begin{tabular}{@{}ll@{}}
+\verb!notation!     & $\displaystyle{G\left(p\right)}$ \\
+\verb!cdf!          & $\displaystyle{1-\left(1-p\right)^k}$ for $\displaystyle{k\in\mathbb{N}}$ \\
+\verb!pmf!          & $\displaystyle{\left(1-p\right)^{k-1}p}$ for $\displaystyle{k\in\mathbb{N}}$ \\
+\verb!expectation!  & $\displaystyle{\frac{1}{p}}$ \\
+\verb!variance!     & $\displaystyle{\frac{1-p}{p^2}}$ \\
+\verb!mgf!          & $\displaystyle{\frac{pe^t}{1-\left(1-p\right)e^t}}$
+\end{tabular}
+
+\verb!story:! the number X of Bernoulli trials needed to get one success. Memoryless.
+
+
+\subsection{Poisson Distribution}
+\begin{tabular}{@{}ll@{}}
+\verb!notation!     & $\displaystyle{Poisson\left(\lambda\right)}$ \\
+\verb!cdf!          & $\displaystyle{e^{-\lambda}\sum_{i=0}^k\frac{\lambda^i}{i!}}$ \\
+\verb!pmf!          & $\displaystyle{\frac{\lambda^k}{k!}\cdot e^{-\lambda}}$ for $\displaystyle{k\in\mathbb{N}}$ \\
+\verb!expectation!  & $\displaystyle{\lambda}$ \\
+\verb!variance!     & $\displaystyle{\lambda}$ \\
+\verb!mgf!          & $\displaystyle{\exp{\left(\lambda\left(e^t-1\right)\right)}}$ \\
+\verb!ind. sum!     & $\displaystyle{\sum_{i=1}^nX_i\sim Poisson\left(\sum_{i=1}^n\lambda_i\right)}$
+\end{tabular}
+
+\verb!story:! the probability of a number of events occurring in a fixed period of time if these
+events occur with a known average rate and independently of the time since the last event.
+
+
+\subsection{Normal Distribution}
+\begin{tabular}{@{}ll@{}}
+\verb!notation!     & $\displaystyle{N\left(\mu,\sigma^2\right)}$ \\
+\verb!pdf!          & $\displaystyle{\frac{1}{\sqrt{2\pi\sigma^2}}
+                       e^{-\left(x-\mu\right)^2/\left(2\sigma^2\right)}}$ \\
+\verb!expectation!  & $\displaystyle{\mu}$ \\
+\verb!variance!     & $\displaystyle{\sigma^2}$ \\
+\verb!mgf!          & $\displaystyle{\exp{\left(\mu t+\frac{1}{2}\sigma^2t^2\right)}}$ \\
+\verb!ind. sum!     & $\displaystyle{\sum_{i=1}^nX_i\sim
+                       N\left(\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^2\right)}$
+\end{tabular}
+
+\verb!story:! describes data that cluster around the mean.
+
+
+\subsection{Standard Normal Distribution}
+\begin{tabular}{@{}ll@{}}
+\verb!notation!     & $\displaystyle{N\left(0,1\right)}$ \\
+\verb!cdf!          & $\displaystyle{\Phi(x)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{x}e^{-t^2/2}dt}$ \\
+\verb!pdf!          & $\displaystyle{\frac{1}{\sqrt{2\pi}}e^{-x^2/2}}$ \\
+\verb!expectation!  & $\displaystyle{\frac{1}{\lambda}}$ \\
+\verb!variance!     & $\displaystyle{\frac{1}{\lambda^2}}$ \\
+\verb!mgf!          & $\displaystyle{\exp{\left(\frac{t^2}{2}\right)}}$
+\end{tabular}
+
+\verb!story:! normal distribution with $\mu=0$ and $\sigma=1$.
+
+\subsection{Exponential Distribution}
+\begin{tabular}{@{}ll@{}}
+\verb!notation!     & $\displaystyle{exp\left(\lambda\right)}$ \\
+\verb!cdf!          & $\displaystyle{1-e^{-\lambda x}}$ for $\displaystyle{x\ge 0}$ \\
+\verb!pdf!          & $\displaystyle{\lambda e^{-\lambda x}}$ for $\displaystyle{x\ge 0}$ \\
+\verb!expectation!  & $\displaystyle{\frac{1}{\lambda}}$ \\
+\verb!variance!     & $\displaystyle{\frac{1}{\lambda^2}}$ \\
+\verb!mgf!          & $\displaystyle{\frac{\lambda}{\lambda-t}}$ \\
+\verb!ind. sum!     & $\displaystyle{\sum_{i=1}^kX_i\sim Gamma\left(k,\lambda\right)}$ \\
+\verb!minimum!      & $\displaystyle{\sim exp\left(\sum_{i=1}^k\lambda_i\right)}$
+\end{tabular}
+
+\verb!story:! the amount of time until some specific event occurs, starting from now,
+being memoryless.
+
+
+\subsection{Binomial Distribution}
+\begin{tabular}{@{}ll@{}}
+\verb!notation!     & $\displaystyle{Bin(n,p)}$ \\
+\verb!cdf!          & $\displaystyle{\sum_{i=0}^k {n \choose i} p^i\left(1-p\right)^{n-i}}$ \\
+\verb!pmf!          & $\displaystyle{{n \choose i} p^i\left(1-p\right)^{n-i}}$ \\
+\verb!expectation!  & $\displaystyle{np}$ \\
+\verb!variance!     & $\displaystyle{np\left(1-p\right)}$ \\
+\verb!mgf!          & $\displaystyle{\left(1-p+pe^t\right)^n}$
+\end{tabular}
+
+\verb!story:! the discrete probability distribution of the number of successes in a sequence of $n$
+independent yes/no experiments, each of which yields success with probability $p$.
+
+
+\rule{\linewidth}{2.5pt}
+
+\section{Basics}
+\subsection{Comulative Distribution Function}
+$\displaystyle{F_X\left(x\right)=\p{X\le x}}$
+
+\subsection{Probability Density Function}
+$\displaystyle{F_X\left(x\right)=\int_{-\infty}^{\infty}f_X\left(t\right)dt}$
+
+$\displaystyle{\int_{-\infty}^{\infty}f_X\left(t\right)dt=1}$
+
+$\displaystyle{f_X\left(x\right)=\frac{d}{dx}F_X\left(x\right)}$
+
+\subsection{Quantile Function}
+The function $X^*:\left[0,1\right]\to\mathbb{R}$ for which for any $p\in\left[0,1\right]$,
+$F_X\left(X^*\left(p\right)^{-}\right)\le p \le F_X\left(X^*\left(p\right)\right)$
+
+$\displaystyle{F_{X^*}=F_X}$
+
+$\displaystyle{\e{X^*}=\e{X}}$
+
+\subsection{Expectation}
+$\displaystyle{\e{X}=\int_0^1X^*(p)dp}$
+
+$\displaystyle{\e{X}=\int_{-\infty}^0F_X\left(t\right)dt+\int_0^{\infty}\left(1-F_X\left(t\right)\right)dt}$
+
+$\displaystyle{\e{X}=\int_{-\infty}^{\infty}xf_X{x}dx}$
+
+$\displaystyle{\e{g\left(X\right)}=\int_{-\infty}^{\infty}g\left(x\right)f_X{x}dx}$
+
+$\displaystyle{\e{aX+b}=a\e{X}+b}$
+
+\subsection{Variance}
+$\displaystyle{\var{X}=\e{X^2}-\left(\e{X}\right)^2}$
+
+$\displaystyle{\var{X}=\e{\left(X-\e{X}\right)^2}}$
+
+$\displaystyle{\var{aX+b}=a^2\var{X}}$
+
+\subsection{Standard Deviation}
+$\displaystyle{\sigma\left(X\right)=\sqrt{\var{X}}}$
+
+\subsection{Covariance}
+$\displaystyle{\cov{X,Y}=\e{XY}-\e{X}\e{Y}}$
+
+$\displaystyle{\cov{X,Y}=\e{\left(X-\e{x}\right)\left(Y-\e{Y}\right)}}$
+
+$\displaystyle{\var{X+Y}=\var{X}+\var{Y}+2\cov{X,Y}}$
+
+\subsection{Correlation Coefficient}
+$\displaystyle{\rho_{X,Y}=\frac{\cov{X,Y}}{\sigma_X,\sigma_Y}}$
+
+\subsection{Moment Generating Function}
+$\displaystyle{M_X\left(t\right)=\e{e^{tX}}}$
+
+$\displaystyle{\e{X^n}=M_X^{\left(n\right)}\left(0\right)}$
+
+$\displaystyle{M_{aX+b}\left(t\right)=e^{tb}M_{aX}\left(t\right)}$
+
+
+\rule{\linewidth}{2.5pt}
+
+\pagebreak
+\section{Joint Distribution}
+$\displaystyle{\mathbb{P}_{X,Y}\left(B\right)=\mathbb{P}\left(\left(X,Y\right)\in B\right)}$
+
+$\displaystyle{F_{X,Y}\left(x,y\right)=\mathbb{P}\left(X\le x,Y\le y\right)}$
+
+
+\subsection{Joint Density}
+$\displaystyle{\mathbb{P}_{X,Y}\left(B\right)=\iint_B f_{X,Y}\left(s,t\right)dsdt}$
+
+$\displaystyle{F_{X,Y}\left(x,y\right)=\int_{-\infty}^x\int_{-\infty}^yf_{X,Y}\left(s,t\right)dtds}$
+
+$\displaystyle{\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f_{X,Y}\left(s,t\right)dsdt=1}$
+
+\subsection{Marginal Distributions}
+$\displaystyle{\mathbb{P}_X\left(B\right) = \mathbb{P}_{X,Y}\left(B\times\mathbb{R}\right)}$
+
+$\displaystyle{\mathbb{P}_Y\left(B\right) = \mathbb{P}_{X,Y}\left(\mathbb{R}\times Y\right)}$
+
+$\displaystyle{F_X\left(a\right) =
+\int_{-\infty}^a\int_{-\infty}^{\infty}f_{X,Y}\left(s,t\right)dtds}$
+
+$\displaystyle{F_Y\left(b\right) =
+\int_{-\infty}^b\int_{-\infty}^{\infty}f_{X,Y}\left(s,t\right)dsdt}$
+
+\subsection{Marginal Densities}
+$\displaystyle{f_X\left(s\right)=\int_{-\infty}^{\infty}f_{X,Y}(s,t)dt}$
+
+$\displaystyle{f_Y\left(t\right)=\int_{-\infty}^{\infty}f_{X,Y}(s,t)ds}$
+
+\subsection{Joint Expectation}
+$\displaystyle{\mathbb{E}\left(\varphi\left(X,Y\right)\right)=\iint_{\mathbb{R}^2}\varphi\left(x,y\right)f_{X,Y}\left(x,y\right)dxdy}$
+
+\rule{\linewidth}{2.5pt}
+
+
+\section{Independent r.v.}
+
+$\displaystyle{\mathbb{P}\left(X\le x,Y\le y\right)=\mathbb{P}\left(X\le
+ x\right)\mathbb{P}\left(Y\le y\right)}$
+
+$\displaystyle{F_{X,Y}\left(x,y\right)=F_X\left(x\right)F_Y\left(y\right)}$
+
+$\displaystyle{f_{X,Y}\left(s,t\right)=f_X\left(s\right)f_Y\left(t\right)}$
+
+$\displaystyle{\e{XY}=\e{X}\e{Y}}$
+
+$\displaystyle{\var{X+Y}=\var{X}+\var{Y}}$
+
+Independent events:
+
+$\displaystyle{\p{A\cap B}=\p{A}\p{B}}$
+
+\rule{\linewidth}{2.5pt}
+
+\section{Conditional Probability}
+$\displaystyle{\mathbb{P}\left(A\mid B\right)=\frac{\mathbb{P}\left(A\cap
+B\right)}{\mathbb{P}\left(B\right)}}$
+
+\verb!bayes! $\displaystyle{\p{A\mid B}=\frac{\p{B\mid A}\p{A}}{\p{B}}}$
+
+\subsection{Conditional Density}
+$\displaystyle{f_{X\mid Y=y}\left(x\right)=\frac{f_{X,Y}\left(x,y\right)}{f_Y\left(y\right)}}$
+
+$\displaystyle{f_{X\mid Y=n}\left(x\right)=\frac{f_X\left(x\right)\mathbb{P}\left(Y=n\mid
+ X=x\right)}{\mathbb{P}\left(Y=n\right)}}$
+
+$\displaystyle{F_{X\mid Y=y} = \int_{-\infty}^{x}f_{X\mid Y=y}\left(t\right)dt}$
+
+\subsection{Conditional Expectation}
+$\displaystyle{\e{X\mid Y=y}=\int_{-\infty}^\infty xf_{X\mid Y=y}\left(x\right)dx}$
+
+$\displaystyle{\e{\e{X\mid Y}} = \e{X}}$
+
+$\displaystyle{\p{Y=n}=\e{\mathbb{I}_{Y=n}}=\e{\e{\mathbb{I}_{Y=n}\mid X}}}$
+
+\rule{\linewidth}{2.5pt}
+
+
+\section{Sequences and Limits}
+$\displaystyle{\limsup A_n = \left\{A_n \text{ i.o.}\right\} = \bigcap_{m=1}^\infty
+ \bigcup_{n=m}^\infty A_n}$
+
+$\displaystyle{\liminf A_n = \left\{A_n \text{ eventually}\right\} = \bigcup_{m=1}^\infty
+ \bigcap_{n=m}^\infty A_n}$
+
+$\displaystyle{\liminf A_n \subseteq \limsup A_n}$
+
+$\displaystyle{\left(\limsup A_n\right)^c = \liminf A_n^c}$
+
+$\displaystyle{\left(\liminf A_n\right)^c = \limsup A_n^c}$
+
+$\displaystyle{\p{\limsup A_n} = \lim_{n\to\infty}\p{\bigcup_{n=m}^\infty A_n}}$
+
+$\displaystyle{\p{\liminf A_n} = \lim_{n\to\infty}\p{\bigcap_{n=m}^\infty A_n}}$
+
+\subsection{Borel-Cantelli Lemma}
+$\displaystyle{\sum_{n=1}^\infty\p{A_n}<\infty \Rightarrow \p{\limsup A_n}=0}$
+
+And if $A_n$ are independent:
+
+$\displaystyle{\sum_{n=1}^\infty\p{A_n}=\infty \Rightarrow \p{\limsup A_n}=1}$
+
+
+\rule{\linewidth}{2.5pt}
+
+
+\section{Convergence}
+\subsection{Convergence in Probability}
+\begin{tabular}{@{}ll@{}}
+\verb!notation! & $\displaystyle{X_n\xrightarrow{p}X}$ \\
+\verb!meaning!  & $\displaystyle{\lim_{n\to\infty}\p{\left|X_n-X\right|>\varepsilon}=0}$
+\end{tabular}
+
+\subsection{Convergence in Distribution}
+\begin{tabular}{@{}ll@{}}
+\verb!notation! & $\displaystyle{X_n\xrightarrow{D}X}$ \\
+\verb!meaning!  & $\displaystyle{\lim_{n\to\infty}F_n\left(x\right)=F\left(x\right)}$
+\end{tabular}
+
+\subsection{Almost Sure Convergence}
+\begin{tabular}{@{}ll@{}}
+\verb!notation! & $\displaystyle{X_n\xrightarrow{a.s.}X}$ \\
+\verb!meaning!  & $\displaystyle{\p{\lim_{n\to\infty}X_n=X}=1}$
+\end{tabular}
+
+\subsubsection{Criteria for a.s. Convergence}
+\begin{itemize}\setlength{\itemindent}{-1.5em}
+  \item $\displaystyle{\forall\varepsilon \exists N \forall n>N:\p{\left|X_n-X\right|<\varepsilon}>1-\varepsilon}$
+  \item $\displaystyle{\forall\varepsilon \p{\limsup\left(\left|X_n-X\right|>\varepsilon\right)}=0}$
+  \item $\displaystyle{\forall\varepsilon
+  \sum_{n=1}^\infty\p{\left|X_n-X\right|>\varepsilon}<\infty}$ (by B.C.)
+\end{itemize}
+
+\subsection{Convergence in $L_p$}
+\begin{tabular}{@{}ll@{}}
+\verb!notation! & $\displaystyle{X_n\xrightarrow{L_p}X}$ \\
+\verb!meaning!  & $\displaystyle{\lim_{n\to\infty}\e{\left|X_n-X\right|^p}=0}$
+\end{tabular}
+
+\subsection{Relationships}
+$$\begin{matrix}
+  \xrightarrow{L_q}  & \underset{q>p\ge 1}{\Rightarrow} &  \xrightarrow{L_p}  &             & \\
+                     &                                  &     \Downarrow      &             & \\
+  \xrightarrow{a.s.} &            \Rightarrow           & \xrightarrow{\ p\ } & \Rightarrow & \xrightarrow{\ D\ }
+  \end{matrix}$$
+If $X_n\xrightarrow{D} c$ then $X_n\xrightarrow{p} c$
+
+If $\displaystyle{X_n\xrightarrow{p}X}$ then there exists a subsequence $n_k$ s.t.
+  $\displaystyle{X_{n_k}\xrightarrow{a.s.}X}$
+
+\subsection{Laws of Large Numbers}
+If $X_i$ are i.i.d. r.v.,
+\begin{tabular}{@{}ll@{}}
+\verb!weak law!   & $\displaystyle{\overline{X_n}\xrightarrow{p}\e{X_1}}$ \\
+\verb!strong law! & $\displaystyle{\overline{X_n}\xrightarrow{a.s.}\e{X_1}}$
+\end{tabular}
+
+\subsection{Central Limit Theorem}
+$\displaystyle{\frac{S_n-n\mu}{\sigma\sqrt{n}}\xrightarrow{D}N\left(0,1\right)}$
+
+If $t_n\to t$, then
+
+$\displaystyle{\p{\frac{S_n-n\mu}{\sigma\sqrt{n}}\le t_n}\to\Phi\left(t\right)}$
+
+
+\rule{\linewidth}{2.5pt}
+
+
+\section{Inequalities}
+\subsection{Markov's inequality}
+$\displaystyle{\p{\left|X\right|\ge t}\le\frac{\e{\left|X\right|}}{t}}$
+
+\subsection{Chebyshev's inequality}
+$\displaystyle{\p{\left|X-\e{X}\right|\ge\varepsilon}\le\frac{\var{X}}{\varepsilon^2}}$
+
+\subsection{Chernoff's inequality}
+Let $X\sim Bin(n,p)$; then:
+$\displaystyle{\p{X-\e{X}>t\sigma\left(X\right)}<e^{-t^2/2}}$
+
+Simpler result; for every $X$:
+$\displaystyle{\p{X\ge a} \le M_X\left(t\right)e^{-ta}}$
+
+\subsection{Jensen's inequality}
+for $\varphi$ a convex function,
+$\displaystyle{\varphi\left(\e{X}\right)\le\e{\varphi\left(X\right)}}$
+
+
+\rule{\linewidth}{2.5pt}
+
+
+\section{Miscellaneous}
+$\displaystyle{\mathbb{E}\left(Y\right)<\infty \iff
+\sum_{n=0}^\infty\mathbb{P}\left(Y>n\right)<\infty}$ ($Y\ge 0$)
+
+$\displaystyle{\mathbb{E}\left(X\right)=\sum_{n=0}^\infty\mathbb{P}\left(X>n\right)}$
+($X\in\mathbb{N}$)
+
+$\displaystyle{X\sim U\left(0,1\right) \iff -\ln{X}\sim exp\left(1\right)}$
+
+\subsection{Convolution}
+For ind. $X,Y$, $Z=X+Y$:
+$\displaystyle{f_Z\left(z\right) = \int_{-\infty}^\infty f_X\left(s\right)f_Y\left(z-s\right)ds}$
+
+\subsection{Kolmogorov's 0-1 Law}
+If $A$ is in the tail $\sigma$-algebra $\mathcal{F}^t$, then $\p{A}=0$ or $\p{A}=1$
+
+\subsection{Ugly Stuff}
+cdf of Gamma distribution:
+
+$\displaystyle{\int_0^t\frac{\theta^kx^{k-1}e^{-\theta k}}{\left(k-1\right)!}dx}$
+
+\vspace{5em}
+\rule{0.3\linewidth}{0.25pt}
+\scriptsize
+
+This cheatsheet was made by Peleg Michaeli in November 2010, using \LaTeX.
+
+version: 1.01
+
+comments: peleg.michaeli@math.tau.ac.il
+
+
+\end{multicols}
+\end{document}
