@@ -1,4 +1,4 @@
-# Probability Sheet
+# Probability Cheat Sheet
 
 This repository contains a probability sheet created 14 years ago.
 
